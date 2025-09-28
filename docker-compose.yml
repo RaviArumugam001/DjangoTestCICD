@@ -6,7 +6,7 @@ services:
     container_name: django_app_cicd
     command: >
       sh -c "python manage.py migrate &&
-             pytest --maxfail=1 --disable-warnings -q"
+                   pytest --maxfail=1 --disable-warnings -q"
     volumes:
       - .:/app
 

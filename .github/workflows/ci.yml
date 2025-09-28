@@ -11,11 +11,16 @@ jobs:
     runs-on: self-hosted
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Docker
-        uses: docker/setup-buildx-action@v3
+      - name: Fix permissions
+        run: sudo chown -R $USER:$USER $GITHUB_WORKSPACE
 
-      - name: Run tests in Docker
-        run: docker-compose -f docker-compose.yml up --build --exit-code-from web
+      - name: Clean up any old containers
+        run: docker compose -f docker-compose.yml down --volumes --remove-orphans || true
+
+      - name: Run tests
+        run: |
+          docker compose -f docker-compose.yml up --build --exit-code-from web --abort-on-container-exit
+          docker compose -f docker-compose.yml down --volumes --remove-orphans
