@@ -20,4 +20,4 @@ jobs:
         run: sudo chown -R $USER:$USER $GITHUB_WORKSPACE
 
       - name: Run tests in Docker
-        run: docker compose -f docker-compose.yml up --build --exit-code-from web
+        run: docker compose -f docker-compose.yml up --build --force-recreate --remove-orphans --exit-code-from web
