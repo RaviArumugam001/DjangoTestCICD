@@ -13,6 +13,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          clean: true
       - name: Fix permissions
         run: sudo chown -R $USER:$USER $GITHUB_WORKSPACE
       - name: Set up Docker
