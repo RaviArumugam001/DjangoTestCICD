@@ -8,7 +8,8 @@ on:
   # Run tests after merge (push to main)
   push:
     branches: [ "main" ]
-
+permissions:
+  contents: read   # least privilege
 jobs:
   test:
     runs-on: ubuntu-latest
